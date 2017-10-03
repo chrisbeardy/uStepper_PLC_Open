@@ -2,7 +2,7 @@
 
 # uStepper_PLC_Open
 
-This code in this project is designed to be run on uStepper controllers:
+This code in this project is designed to be run on uStepper controllers:  
 http://www.ustepper.com/index/  
 
 It is designed for when you want to use the uStepper as an "intelligent" drive,  
@@ -13,7 +13,7 @@ over timing with less hardware signals required.
 
 It follows the practice conventionally used in industrial control and automation  
 using the functions described in PLC_Open motion control using the IEC 61131-3  
-Programming Languages:
+Programming Languages:  
 http://www.plcopen.org/pages/tc2_motion_control/part_1_2/index.htm  
 
 The setup requires serial communication to each uStepper. I2C may have been a  
