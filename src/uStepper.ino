@@ -47,11 +47,10 @@ void setup()
   Serial.begin(9600);
 }
 
+
 void serialEvent()
 {
-    /* This event occurs whenever serial data is sent from the master controller.
-     *  It works as an interrupt, therefore code should be kept minimal.
-     *  Essentially this function just reads the commands into the a string and
+    /*  Essentially this function just reads the commands into the a string and
      *  the code in the main loop chooses what to do with it.
      */
     char strX;
@@ -64,6 +63,16 @@ void serialEvent()
      command += strX;
      delay(5);
     }
+}
+
+void negativecmd(String order, int* mysub)
+{    
+    if(*mysub == 0) // toInt() return 0, if the first value of the string isn't an integer. As the character "-" isn't one
+                   // when transmitting a negative value in a string it will return 0
+      {
+          *mysub = order.substring(3).toInt();
+          *mysub = - (*mysub);
+      }
 }
 
 void loop()
@@ -99,21 +108,25 @@ void loop()
     }
     else if (command.substring(0,2)=="06" & !stepper.getMotorState()) //move relative(soft) mode
     {
+      negativecmd(command, &sub);
       stepper.moveAngle(sub,SOFT);
       command = "";
     }
      else if (command.substring(0,2)=="07" & !stepper.getMotorState()) //move relative(hard) mode
     {
+      negativecmd(command, &sub);
       stepper.moveAngle(sub,HARD);
       command = "";
     }
     else if(command.substring(0,2)=="08" & !stepper.getMotorState()) //move absolute(SOFT) mode
     {
+      negativecmd(command, &sub);
       stepper.moveToAngle(sub,SOFT);
       command = "";
     }
      else if(command.substring(0,2)=="09" & !stepper.getMotorState()) //move absolute(HARD) mode
     {
+      negativecmd(command, &sub);
       stepper.moveToAngle(sub,HARD);
       command = "";
     }
