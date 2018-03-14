@@ -187,6 +187,7 @@ int delay_t (float dis, float velo) //d and v imported
 void coreXY(float setX, float setY)
 {
   // corexy equations/motions http://corexy.com/theory.html
+  float dX = setX - actX
   float dY = setY - actY;
   float dA = dX + dY;
   float dB = dX - dY;
